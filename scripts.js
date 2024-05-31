@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
             description: "Importância da imagem pessoal..."
         }
     ];
+    
 
     function createCard(item) {
         return `
@@ -68,4 +69,16 @@ document.addEventListener("DOMContentLoaded", function() {
     renderSection('eventos', eventos);
     renderSection('reunioes', reunioes);
     renderSection('workshops', workshops);
+
+    // Toggle navigation
+    const sideMenu = document.getElementById('sideMenu');
+    const menuToggle = document.getElementById('menuToggle');
+
+    menuToggle.addEventListener('click', function() {
+        if (sideMenu.style.left === '0px') {
+            sideMenu.style.left = '-70px';
+        } else {
+            sideMenu.style.left = '0px';
+        }
+    });
 });
