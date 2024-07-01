@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendário</title>
+    <title>Index</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -39,40 +39,24 @@
 </div>
 
 <div class="container">
-    <div class="calendar-container">
-        <div id="calendar" class="calendar">
-            <div class="month">
-                <ul>
-                    <li class="prev">&#10094;</li>
-                    <li>
-                        <span id="month"></span><br>
-                        <span id="year"></span>
-                    </li>
-                    <li class="next">&#10095;</li>
-                    
-                </ul>
-            </div>
-            <ul class="weekdays">
-                <li>Dom</li>
-                <li>Seg</li>
-                <li>Ter</li>
-                <li>Qua</li>
-                <li>Qui</li>
-                <li>Sex</li>
-                <li>Sab</li>
+    <div class="section">
+        <h2>Eventos <span class="filter">Esse mês</span></h2>
+        <ul class="event-list" id="eventos">
             </ul>
-            <ul class="days"></ul>
-        </div>
     </div>
 
-    <div class="events-container" id="events">
+    <div class="section">
+        <h2>Reuniões</h2>
+        <ul class="event-list" id="reunioes">
+            </ul>
     </div>
 
-    <button class="big-button" onclick="location.href='pagina-eventos.html'">Agendamentos</button>
+    <button class="add-button" onclick="window.location.href='pagina-criar-agendamento.html'">
+        <i class="fas fa-plus"></i>
+    </button>
 </div>
 
-
-<script src="scripts-calendario.js"></script>
+<script src="scripts-agendamentos.js"></script>
 
 <footer>
     <div class="footer-content">
