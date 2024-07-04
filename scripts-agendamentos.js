@@ -23,8 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
             const eventDate = new Date(item.data.replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$3-$2-$1"));
             const today = new Date();
             const isPastEvent = eventDate < today;
-
-            // Cria elementos separados para nome, data e checkbox
             const nomeSpan = document.createElement("span");
             nomeSpan.textContent = item.nome;
             nomeSpan.classList.add("event-name");
@@ -36,7 +34,10 @@ document.addEventListener("DOMContentLoaded", function() {
             checkbox.classList.add("check-icon");
             checkbox.checked = isPastEvent;
 
-            // Adiciona os elementos ao item da lista
+            const checkboxStateKey = `${containerId}-${item.nome}`;
+            const savedState = localStorage.getItem(checkboxStateKey);
+            checkbox.checked = savedState === "true";
+
             li.appendChild(nomeSpan);
             li.appendChild(dataSpan);
             li.appendChild(checkbox);
@@ -48,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else {
                     li.style.backgroundColor = eventDate < today ? "#f2f2f2" : "#00d084"; 
                 }
+                localStorage.setItem(checkboxStateKey, this.checked);
+                li.style.backgroundColor = this.checked || eventDate < today ? "#f2f2f2" : "#00d084"; 
             });
             container.appendChild(li);
         });

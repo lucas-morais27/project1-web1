@@ -3,19 +3,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const empresas = [
         {
-            logo: "images/logos/logo3.png",
             nome: "Cacau Show",
-            fraseEfeito: "Bônus 4x mais pontos como CacauLovers."
+            img: "images/logos/logo3.png",
+            beneficios: ["Bônus"],
+            fraseEfeito: "Bônus 4x mais pontos como CacauLovers.",
+            website: "https://www.cacaushow.com.br"
         },
         {
-            logo: "images/logos/logo2.png",
             nome: "Unimed",
-            fraseEfeito: "Plano de Saúde para você e sua família."
+            img: "images/logos/logo2.png",
+            beneficios: ["Plano de saúde"],
+            fraseEfeito: "Plano de Saúde para você e sua família.",
+            website: "https://www.unimed.coop.br" 
         },
         {
-            logo: "images/logos/logo1.png",
             nome: "Vitarella",
-            fraseEfeito: "Cestas mensais com nossos produtos."
+            img: "images/logos/logo1.png",
+            beneficios: ["Vale-refeição"],
+            fraseEfeito: "Cestas mensais com nossos produtos.",
+            website: "https://www.vitarella.com.br" 
         }
     ];
 
@@ -26,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         empresaElement.classList.add('card');
 
         empresaElement.innerHTML = `
-            <img src="${empresa.logo}" alt="${empresa.nome}">
+            <img src="${empresa.img}" alt="${empresa.nome}">
             <div class="content">
                 <h3>${empresa.nome}</h3>
                 <p>${empresa.fraseEfeito}</p>
@@ -34,6 +40,16 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
 
         empresasContainer.appendChild(empresaElement);
+    });
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const empresaNome = card.querySelector('h3').textContent;
+            const empresa = empresas.find(e => e.nome === empresaNome);
+            localStorage.setItem('selectedEmpresa', JSON.stringify(empresa));
+            window.location.href = 'pagina-detalhe-colab.html';
+        });
     });
 
     const sideMenu = document.getElementById('sideMenu');

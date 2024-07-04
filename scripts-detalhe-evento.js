@@ -58,44 +58,26 @@ document.addEventListener("DOMContentLoaded", function() {
             participants: ["Ana Pereira", "Bruno Costa"]
         }
     ];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = localStorage.getItem('selectedEventId'); // Obtém o ID do localStorage
+
+    const allEvents = [...eventos, ...reunioes, ...workshops];
+    const event = allEvents.find(e => e.title === eventId);
+
+    if (event) {
+        document.getElementById('eventImg').src = event.img;
+        document.getElementById('eventTitle').textContent = event.title;
+        document.getElementById('eventDate').textContent = event.date ? `${event.date}` : '';
+        const participantsHTML = event.participants.map(participant => `
+            <i class="fas fa-user"></i> ${participant}
+        `).join('');
     
-
-    function createCard(item) {
-        const participantsHTML = item.participants 
-            ? `<p>Participantes: ${item.participants.join(", ")}</p>`
-            : "";
-        return `
-            <div class="card" data-event-id="${item.title}">
-                <img src="${item.img}" alt="${item.title}">
-                <div class="content">
-                    <h3>${item.title}</h3>
-                    ${item.date ? `<p>${item.date}</p>` : ''}
-                    ${item.description ? `<p>${item.description}</p>` : ''}
-                </div>
-            </div>
-        `;
+        document.getElementById('eventParticipants').innerHTML = participantsHTML;
+        document.getElementById('eventDescription').textContent = event.description ? `${event.description}` : '';
+    } else {
+        document.getElementById('eventDetails').innerHTML = "Evento não encontrado.";
     }
-    
-
-    function renderSection(sectionId, items) {
-        const section = document.getElementById(sectionId);
-        items.forEach(item => {
-            section.insertAdjacentHTML('beforeend', createCard(item));
-        });
-    }
-
-    renderSection('eventos', eventos);
-    renderSection('reunioes', reunioes);
-    renderSection('workshops', workshops);
-
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            const eventId = card.dataset.eventId;
-            localStorage.setItem('selectedEventId', eventId); // Armazena o ID no localStorage
-            window.location.href = 'pagina-detalhe-evento.html';
-        });
-    });
 
     // Toggle navigation
     const sideMenu = document.getElementById('sideMenu');
@@ -108,4 +90,5 @@ document.addEventListener("DOMContentLoaded", function() {
             sideMenu.style.left = '0px';
         }
     });
+    
 });
